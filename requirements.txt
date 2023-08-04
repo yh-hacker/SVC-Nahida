@@ -185,7 +185,7 @@ paddleaudio==1.0.2
 paddlefsl==1.1.0
 paddlehub==2.3.0
 paddlenlp==2.4.2
-paddlepaddle @ file:///tmp/paddlepaddle-2.4.1-cp39-cp39-linux_x86_64.whl
+paddlepaddle==2.5.1
 pamela==1.0.0
 pandas==1.1.5
 pandocfilters==1.5.0
