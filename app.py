@@ -169,7 +169,7 @@ with app:
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
         btn_convert.click(convert_fn, [model_name, vocal_input1,micro_input,vc_transform,auto_f0,cluster_ratio, slice_db, noise_scale], [text_output2, vc_output2,vocal_input2])
         btn_compose.click(compose_fn,[vocal_input2,instrumental_input1,mixing_ratio],[text_output3,song_output])
-        btn_reboot(reboot)
+        btn_reboot.click(reboot)
         btn_use_convert.click(lambda x:x,vc_output2,vocal_input2)
         btn_use_separate.click(lambda x:x,vocal_output1,vocal_input1)
         btn_use_separate2.click(lambda x:x,instrumental_output1,instrumental_input1)
