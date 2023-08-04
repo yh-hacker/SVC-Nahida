@@ -13,6 +13,7 @@ import requests
 import utils
 from spleeter import Separator
 import time  
+from datetime import datetime, timedelta  
 
 build_dir=os.getcwd()
 if build_dir == "/home/aistudio":
@@ -22,7 +23,8 @@ model_dir=build_dir+'/trained_models'
 
 model_list_path = model_dir + "/model_list.txt"
 
-start_time = time.time()  
+current_time = datetime.now()  
+one_hour_later = current_time + timedelta(hours=1)  
 
 # 筛选出文件夹
 models = []
@@ -32,14 +34,15 @@ for filename in os.listdir(model_dir):
         models.append(os.path.splitext(filename)[0])
 cache_model = {}
 
-def reboot():   
-    global start_time  
-    if time.time() - start_time >= 3600:  # 运行时间大于等于1小时  
-        gradio.alert("程序将重启...")  
-        os._exit(0)
+def callback(text):  
+    if text == "reboot":  
+        os._exit(0)  
     else:  
-        remaining_time = int(3600 - (time.time() - start_time))  # 计算剩余时间  
-        gradio.alert(f"距离下一次重启还剩{remaining_time}秒")  
+        global start_time  
+        if time.time() - start_time >= 3600:
+            os._exit(0)
+        else:
+            return text  
 
 def separate_fn(song_input):
     try:
@@ -137,6 +140,7 @@ def compose_fn(input_vocal,input_instrumental,mixing_ratio=0.5):
 
 
 app = gr.Blocks()
+
 with app:
     gr.Markdown('<h1 style="text-align: center;">SVC歌声转换全流程体验（伴奏分离，转换，混音）</h1>')
     with gr.Tabs() as tabs:
@@ -176,12 +180,13 @@ with app:
             song_output = gr.Audio(label="输出歌曲",interactive=False)
 
         with gr.TabItem("设置"):
-            btn_reboot = gr.Button("重启程序", variant="primary")
-        
+            start_time = time.time()  
+            output = gr.Textbox(label="输出",placeholder=f"距离下一次允许重启时间为{one_hour_later}")  
+            btn_reboot = gr.Button(label="重启") 
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
         btn_convert.click(convert_fn, [model_name, vocal_input1,micro_input,vc_transform,auto_f0,cluster_ratio, slice_db, noise_scale], [text_output2, vc_output2,vocal_input2])
         btn_compose.click(compose_fn,[vocal_input2,instrumental_input1,mixing_ratio],[text_output3,song_output])
-        btn_reboot.click(reboot)
+        btn_reboot.click(callback,output)
         btn_use_convert.click(lambda x:x,vc_output2,vocal_input2)
         btn_use_separate.click(lambda x:x,vocal_output1,vocal_input1)
         btn_use_separate2.click(lambda x:x,instrumental_output1,instrumental_input1)
