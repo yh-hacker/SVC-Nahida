@@ -156,7 +156,7 @@ python-multipart==0.0.6
 pytz==2023.3
 pytz-deprecation-shim==0.1.0.post0
 PyWavelets==1.4.1
-pyworld==0.2.11.post0
+pyworld==0.2.12
 PyYAML==6.0
 pyzmq==25.0.2
 rapidfuzz==3.0.0
