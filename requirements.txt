@@ -1,0 +1,16 @@
+numba==0.56.4 
+llvmlite==0.39.1 
+matplotlib 
+msgpack 
+librosa==0.10.0.post2 
+onnxruntime-gpu 
+pyworld==0.2.11.post0 
+praat-parselmouth 
+numpy==1.23.4 
+paddleaudio==1.0.2
+gradio==3.19.1
+pydub
+ffmpeg-python
+paddlepaddle==2.5.1
+visualdl
+tqdm

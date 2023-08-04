@@ -1,0 +1,2 @@
+./dataset/44k/yuuka/7_93.wav
+./dataset/44k/yuuka/1_98.wav
