@@ -14,3 +14,9 @@ ffmpeg-python
 paddlepaddle==2.5.1
 visualdl
 tqdm
+paddle
+random
+framework
+fluid
+core
+libpaddle
