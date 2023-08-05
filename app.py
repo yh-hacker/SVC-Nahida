@@ -36,11 +36,15 @@ cache_model = {}
 
 def callback(text):  
     if text == "reboot":  
-        os._exit(0)  
+        os._exit(0)
+        current_time = datetime.now()  
+        one_hour_later = current_time + timedelta(hours=1)  
     else:  
         global start_time  
         if time.time() - start_time >= 3600:
             os._exit(0)
+            current_time = datetime.now()  
+            one_hour_later = current_time + timedelta(hours=1)  
         else:
             return text  
 
@@ -177,7 +181,7 @@ with app:
             mixing_ratio = gr.Slider(0, 1, value=0.75,step=0.01,label="混音比例（人声:伴奏）", info="人声:伴奏")
             btn_compose = gr.Button("混音", variant="primary")
             text_output3 = gr.Textbox(label="输出信息")
-            song_output = gr.Audio(label="输出歌曲",interactive=False)
+            song_output = gr.Audio("输出歌曲",variant="primary")
 
         with gr.TabItem("设置"):
             start_time = time.time()  
