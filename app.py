@@ -23,9 +23,6 @@ model_dir=build_dir+'/trained_models'
 
 model_list_path = model_dir + "/model_list.txt"
 
-current_time = datetime.now()  
-one_hour_later = current_time + timedelta(hours=1)  
-
 # 筛选出文件夹
 models = []
 for filename in os.listdir(model_dir):
@@ -185,6 +182,8 @@ with app:
 
         with gr.TabItem("设置"):
             start_time = time.time()  
+            current_time = datetime.now()  
+            one_hour_later = current_time + timedelta(hours=1)  
             output = gr.Textbox(label="输出",placeholder=f"距离下一次允许重启时间为{one_hour_later}")  
             btn_reboot = gr.Button("重启",variant="primary") 
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
