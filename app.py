@@ -34,14 +34,12 @@ cache_model = {}
 def callback(text):  
     if text == "reboot":  
         os._exit(0)
-        current_time = datetime.now()  
-        one_hour_later = current_time + timedelta(hours=1)  
+        one_hour_later = datetime.now() + timedelta(hours=1)  
     else:  
         global start_time  
         if time.time() - start_time >= 3600:
             os._exit(0)
-            current_time = datetime.now()  
-            one_hour_later = current_time + timedelta(hours=1)  
+            one_hour_later = datetime.now() + timedelta(hours=1)  
         else:
             return text  
 
@@ -181,9 +179,7 @@ with app:
             song_output = gr.Audio(label="输出歌曲",interactive=False)
 
         with gr.TabItem("设置"):
-            start_time = time.time()  
-            current_time = datetime.now()  
-            one_hour_later = current_time + timedelta(hours=1)  
+            one_hour_later = datetime.now() + timedelta(hours=1)  
             output = gr.Textbox(label="输出",placeholder=f"距离下一次允许重启时间为{one_hour_later}")  
             btn_reboot = gr.Button("重启",variant="primary") 
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
