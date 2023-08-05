@@ -181,12 +181,12 @@ with app:
             mixing_ratio = gr.Slider(0, 1, value=0.75,step=0.01,label="混音比例（人声:伴奏）", info="人声:伴奏")
             btn_compose = gr.Button("混音", variant="primary")
             text_output3 = gr.Textbox(label="输出信息")
-            song_output = gr.Audio("输出歌曲",variant="primary")
+            song_output = gr.Audio(label="输出歌曲",interactive=False)
 
         with gr.TabItem("设置"):
             start_time = time.time()  
             output = gr.Textbox(label="输出",placeholder=f"距离下一次允许重启时间为{one_hour_later}")  
-            btn_reboot = gr.Button(label="重启") 
+            btn_reboot = gr.Button("重启",variant="primary") 
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
         btn_convert.click(convert_fn, [model_name, vocal_input1,micro_input,vc_transform,auto_f0,cluster_ratio, slice_db, noise_scale], [text_output2, vc_output2,vocal_input2])
         btn_compose.click(compose_fn,[vocal_input2,instrumental_input1,mixing_ratio],[text_output3,song_output])
