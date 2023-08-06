@@ -141,6 +141,8 @@ def compose_fn(input_vocal,input_instrumental,mixing_ratio=0.5):
 app = gr.Blocks()
 
 with app:
+    start_time = time.time()
+    one_hour_later = datetime.now() + timedelta(hours=1)  
     gr.Markdown('<h1 style="text-align: center;">SVC歌声转换全流程体验（伴奏分离，转换，混音）</h1>')
     with gr.Tabs() as tabs:
         with gr.TabItem("人声伴奏分离"):
@@ -179,7 +181,6 @@ with app:
             song_output = gr.Audio(label="输出歌曲",interactive=False)
 
         with gr.TabItem("设置"):
-            one_hour_later = datetime.now() + timedelta(hours=1)  
             output = gr.Textbox(label="输出",placeholder=f"距离下一次允许重启时间为{one_hour_later}")  
             btn_reboot = gr.Button("重启",variant="primary") 
         btn_separate.click(separate_fn, song_input, [text_output1, vocal_output1,instrumental_output1,vocal_input1,instrumental_input1])
