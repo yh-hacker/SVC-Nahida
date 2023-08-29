@@ -52,3 +52,4 @@ spleeter/2stems_vocals.pdparams filter=lfs diff=lfs merge=lfs -text
 trained_models/纳西妲.pdparams filter=lfs diff=lfs merge=lfs -text
 trained_models/派蒙.pdparams filter=lfs diff=lfs merge=lfs -text
 trained_models/YH.pdparams filter=lfs diff=lfs merge=lfs -text
+trained_models/薛之谦.pdparams filter=lfs diff=lfs merge=lfs -text
